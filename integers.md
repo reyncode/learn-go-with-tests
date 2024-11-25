@@ -118,11 +118,11 @@ func Add(x, y int) int {
 
 If you really want to go the extra mile you can make [Testable Examples](https://blog.golang.org/examples). You will find many examples in the standard library documentation.
 
-Often code examples that can be found outside the codebase, such as a readme file become out of date and incorrect compared to the actual code because they don't get checked.
+Often code examples that can be found outside the codebase, such as a readme file, become out of date and incorrect compared to the actual code because they don't get checked.
 
-Testable Examples are compiled whenever tests are executed. Because such examples are validated by the Go compiler, you can be confident your documentation's examples always reflect current code behavior.
+Example functions are compiled whenever tests are executed. Because such examples are validated by the Go compiler, you can be confident your documentation's examples always reflect current code behavior.
 
-Testable functions begin with `Example` (much like test functions begin with `Test`), and reside in a package's `_test.go` files, . Add the following `ExampleAdd` function to the `adder_test.go` file.
+Example functions begin with `Example` (much like test functions begin with `Test`), and reside in a package's `_test.go` files. Add the following `ExampleAdd` function to the `adder_test.go` file.
 
 ```go
 func ExampleAdd() {
@@ -134,7 +134,7 @@ func ExampleAdd() {
 
 (If your editor doesn't automatically import packages for you, the compilation step will fail because you will be missing `import "fmt"` in `adder_test.go`. It is strongly recommended you research how to have these kind of errors fixed for you automatically in whatever editor you are using.)
 
-Adding this code will cause the example to appear in your `godoc` documentation, making your code even more accessible. If ever your code changes so that the example is no longer valid, your build will fail. 
+Adding this code will cause the example to appear in your documentation, making your code even more accessible. If ever your code changes so that the example is no longer valid, your build will fail.
 
 Running the package's test suite, we can see the example `ExampleAdd` function is executed with no further arrangement from us:
 
@@ -148,7 +148,7 @@ $ go test -v
 
 Notice the special format of the comment, `// Output: 6`. While the example will always be compiled, adding this comment means the example will also be executed. Go ahead and temporarily remove the comment `// Output: 6`, then run `go test`, and you will see `ExampleAdd` is no longer executed.
 
-To view example documentation, let's take a quick look at `godoc`. Run `godoc -http=:6060` and open a web browser to `http://localhost:6060/pkg/`. Inside here you'll see a list of all of Go's Standard Library packages, plus Third Party packages you have installed, under which you should see your example documentation for `learn-go-with-tests`. Now look under `Integers`, then under `func Add`, then expand `Example` and you should see the example you added for `sum := Add(1, 5)`.
+To view example documentation, let's take a quick look at `pkgsite`. Navigate to your project's directory, then run `pkgsite -open .`, which should open a web browser for you, pointing to `http://localhost:8080`. Inside here you'll see a list of all of Go's Standard Library packages, plus Third Party packages you have installed, under which you should see your example documentation for `github.com/quii/learn-go-with-tests`. Follow that link, and then look under `Integers`, then under `func Add`, then expand `Example` and you should see the example you added for `sum := Add(1, 5)`.
 
 If you publish your code with examples to a public URL, you can share the documentation of your code at [pkg.go.dev](https://pkg.go.dev/). For example, [here](https://pkg.go.dev/github.com/quii/learn-go-with-tests/integers/v2) is the finalised API for this chapter. This web interface allows you to search for documentation of standard library packages and third-party packages.
 
